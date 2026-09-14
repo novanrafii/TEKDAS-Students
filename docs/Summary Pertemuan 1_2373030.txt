@@ -1,0 +1,9 @@
+1. Lapisan mana yang paling saya pahami?
+- Lapisan yang paling cepat dan mudah dikuasai adalah Lapisan Antarmuka Editor dan Penerbitan Dokumen Dasar.  Mengkloning repositori visual melalui GitHub Desktop dan membukanya di VS Code memiliki alur grafis yang jelas tanpa banyak konflik konfigurasi.  Eksekusi quarto render untuk melihat pratinjau dokumen (HTML/PDF) memberikan umpan balik instan yang langsung terlihat di peramban atau file explorer. 
+
+2. Lapisan mana yang masih saya campuradukkan?
+Lapisan Runtime (Python Global vs Virtual Environment .venv), Sering tercampur antara perintah di terminal sistem biasa dengan .venv.  Python yang dipasang lewat requirements.txt gagal dikenali karena perintah dijalankan sebelum .venv aktif atau terhambat izin eksekusi skrip PowerShell.  Ketidakpahaman batasan file, seperti tidak sengaja memasukkan folder .venv ke dalam Git alih-alih mengecualikannya lewat .gitignore. 
+
+3. Bukti apa yang membuat sebuah sistem layak disebut “cerdas” dan bertanggung jawab?
+Kemampuan Inferensi Kontekstual: Sistem mengintegrasikan model bahasa Llama 3.2 melalui Ollama yang mampu merespons instruksi natural secara adaptif dan dinamis, bukan sekadar aturan statis berbasis kondisi logika kaku.  
+Eksekusi Komputasi Mandiri Sistem mampu menjalankan penalaran atau pemrosesan tugas bahasa alami langsung di lingkungan lokal perangkat tanpa bergantung penuh pada layanan daring eksternal. 
