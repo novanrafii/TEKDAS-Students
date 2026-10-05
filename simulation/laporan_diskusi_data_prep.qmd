@@ -1,0 +1,188 @@
+---
+title: "Laporan Diskusi: Data Preparation untuk Customer Churn"
+author: "AI Assistant"
+date: "2026-10-05"
+format:
+  pdf:
+    toc: true
+    number-sections: true
+    documentclass: article
+    geometry:
+      - margin=1in
+    colorlinks: true
+---
+
+# Pendahuluan
+
+Dokumen ini merangkum hasil diskusi mengenai file `data_prep.py` dan dataset yang dihasilkan dalam folder `simulation`. Fokus utama dari pembahasan adalah bagaimana data pelanggan dipersiapkan agar siap dipakai untuk tugas machine learning klasifikasi churn pelanggan.
+
+# 1. Isi File `data_prep.py`
+
+File `data_prep.py` berfungsi sebagai script preprocessing data. Tugas utamanya adalah:
+
+- membaca 4 file CSV sumber,
+- memvalidasi struktur kolom,
+- membuat fitur baru untuk analisis pelanggan,
+- membagi data menjadi data latih dan data uji,
+- menyimpan hasil akhir ke file CSV dan JSON.
+
+## Fungsi utama
+
+1. `load_source_data()`
+   - membaca file `customers.csv`, `orders.csv`, `product_summary.csv`, dan `monthly_revenue.csv`.
+
+2. `validate_sources()`
+   - memastikan dataset yang dipakai memiliki kolom yang sesuai.
+   - jika ada kolom yang hilang, program akan menghasilkan error.
+
+3. `prepare_customer_features()`
+   - membuat fitur baru seperti:
+     - `customer_tenure_days`
+     - `orders_per_year`
+     - `reviews_per_order`
+     - `returns_per_order`
+   - target `churned` diubah menjadi tipe integer.
+
+4. `build_data_quality_report()`
+   - menghasilkan laporan ringkas mengenai churn rate, return rate, dan kecocokan revenue antar tabel.
+
+5. `main()`
+   - menjalankan keseluruhan proses: load data, validasi, preprocessing, split data, dan menyimpan hasil.
+
+# 2. Isi Keempat CSV Sumber
+
+## 2.1 `customers.csv`
+File ini berisi profil pelanggan. Kolom utamanya mencakup:
+
+- `customer_id`
+- `country`
+- `age`
+- `gender`
+- `membership_tier`
+- `registration_date`
+- `total_orders`
+- `total_spend_usd`
+- `avg_order_value_usd`
+- `days_since_last_purchase`
+- `preferred_category`
+- `preferred_device`
+- `preferred_payment_method`
+- `acquisition_channel`
+- `reviews_given`
+- `avg_review_score`
+- `returns_made`
+- `wishlist_items`
+- `newsletter_subscribed`
+- `churned`
+
+Artinya, file ini berisi karakteristik pelanggan dan label target `churned`.
+
+## 2.2 `orders.csv`
+File ini berisi detail transaksi pelanggan. Kolom utama mencakup:
+
+- `order_id`
+- `customer_id`
+- `order_date`
+- `product_name`
+- `category`
+- `total_amount_usd`
+- `order_status`
+- `returned`
+- `customer_rating`
+- `payment_method`
+- `device_used`
+
+Artinya, file ini menggambarkan setiap pembelian dan status transaksi.
+
+## 2.3 `product_summary.csv`
+File ini berisi ringkasan performa tiap produk. Kolom pentingnya:
+
+- `category`
+- `product_name`
+- `total_orders`
+- `total_revenue_usd`
+- `avg_price`
+- `avg_rating`
+- `return_rate`
+- `avg_discount_pct`
+- `avg_delivery_days`
+
+Artinya, file ini menggambarkan produk secara agregat, bukan data pelanggan per individu.
+
+## 2.4 `monthly_revenue.csv`
+File ini berisi ringkasan pendapatan bulanan. Kolom pentingnya:
+
+- `year`
+- `month`
+- `quarter`
+- `orders`
+- `revenue_usd`
+- `avg_order_value`
+- `avg_discount_pct`
+- `return_rate`
+- `unique_customers`
+- `new_customers`
+
+Artinya, file ini menggambarkan performa bisnis dari sisi bulanan.
+
+# 3. Dataset Hasil Preprocessing
+
+Setelah script dijalankan, dibuat tiga file utama:
+
+## 3.1 `customer_ml_dataset.csv`
+File ini adalah dataset lengkap yang sudah siap dipakai untuk modeling. Data ini memuat:
+
+- kolom pelanggan dasar,
+- kolom fitur engineered,
+- kolom target `churned`.
+
+Contoh fitur engineered:
+
+- `customer_tenure_days`
+- `orders_per_year`
+- `reviews_per_order`
+- `returns_per_order`
+
+File ini berfungsi sebagai dataset final sebelum pembagian train/test.
+
+## 3.2 `customer_train.csv`
+File ini berisi subset data yang dipakai untuk training model. Biasanya sekitar 80% dari dataset total. Model akan belajar pola dari data ini.
+
+Tujuan:
+
+- mempelajari hubungan antara fitur dan churn,
+- membangun model prediksi.
+
+## 3.3 `customer_test.csv`
+File ini berisi subset data yang dipakai untuk evaluasi model. Biasanya sekitar 20% dari dataset total. Data ini tidak dipakai saat training, sehingga berguna untuk mengukur kemampuan prediksi model terhadap data baru.
+
+Tujuan:
+
+- menguji performa model,
+- melihat apakah model generalize dengan baik.
+
+# 4. Hubungan Antar File
+
+Hubungan ketiga file dataset hasil preprocessing adalah:
+
+- `customer_ml_dataset.csv` = data lengkap sebelum split,
+- `customer_train.csv` = data untuk pembelajaran,
+- `customer_test.csv` = data untuk pengujian.
+
+Secara umum, prosesnya adalah:
+
+1. baca data sumber,
+2. lakukan feature engineering,
+3. gabungkan semua fitur dan target,
+4. split data menjadi train dan test,
+5. simpan hasilnya ke file CSV.
+
+# 5. Kesimpulan
+
+Script `data_prep.py` merupakan tahap penting sebelum membangun model churn. Tanpa tahap preprocessing ini, dataset tidak akan siap digunakan untuk machine learning karena masih perlu diubah menjadi format yang konsisten, ditambahkan fitur engineered, dan dibagi menjadi data latih dan data uji.
+
+Dengan demikian, file-file yang dihasilkan ini menjadi fondasi untuk proses klasifikasi pelanggan apakah akan churn atau tidak.
+
+---
+
+Sumber: hasil diskusi dan isi file proyek `simulation/data_prep.py` serta dataset CSV yang dihasilkan di folder `simulation`.
