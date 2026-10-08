@@ -1,0 +1,35 @@
+{
+  "source_file": "student_retention.csv",
+  "rows": 4424,
+  "columns": 35,
+  "target": "Target",
+  "target_counts": {
+    "Graduate": 2209,
+    "Dropout": 1421,
+    "Enrolled": 794
+  },
+  "missing_cells": 0,
+  "duplicate_rows": 0,
+  "train_rows": 3318,
+  "test_rows": 1106,
+  "categorical_code_columns": [
+    "Marital status",
+    "Application mode",
+    "Course",
+    "Daytime/evening attendance",
+    "Previous qualification",
+    "Nacionality",
+    "Mother's qualification",
+    "Father's qualification",
+    "Mother's occupation",
+    "Father's occupation",
+    "Displaced",
+    "Educational special needs",
+    "Debtor",
+    "Tuition fees up to date",
+    "Gender",
+    "Scholarship holder",
+    "International"
+  ],
+  "note": "Kode kategori diperlakukan sebagai kategori; data tidak dihapus otomatis selain tidak ada perubahan baris."
+}
