@@ -1,0 +1,54 @@
+{
+  "source_file": "Coffee Shop Sales.xlsx",
+  "sheet": "Transactions",
+  "original_rows": 149116,
+  "original_columns": [
+    "transaction_id",
+    "transaction_date",
+    "transaction_time",
+    "transaction_qty",
+    "store_id",
+    "store_location",
+    "product_id",
+    "unit_price",
+    "product_category",
+    "product_type",
+    "product_detail"
+  ],
+  "missing_before": {
+    "transaction_id": 0,
+    "transaction_date": 0,
+    "transaction_time": 0,
+    "transaction_qty": 0,
+    "store_id": 0,
+    "store_location": 0,
+    "product_id": 0,
+    "unit_price": 0,
+    "product_category": 0,
+    "product_type": 0,
+    "product_detail": 0
+  },
+  "duplicate_rows_before": 0,
+  "trimmed_values": {
+    "store_location": 0,
+    "product_category": 0,
+    "product_type": 0,
+    "product_detail": 1952
+  },
+  "dimension_mapping_conflicts": {
+    "store_id": {},
+    "product_id": {}
+  },
+  "duplicate_transaction_ids": 0,
+  "duplicate_rows_after_trim": 0,
+  "total_sales": 698812.3300000002,
+  "total_units": 214470,
+  "total_transactions": 149116,
+  "average_recorded_transaction_value": 4.686367190643527,
+  "currency": "Tidak dinyatakan pada file sumber",
+  "grain": "Satu baris per transaction_id, satu produk. Belum dipastikan sebagai seluruh isi struk.",
+  "issues": [],
+  "audit_status": "passed",
+  "prepared_rows": 149116,
+  "rows_removed": 0
+}
